@@ -1,54 +1,33 @@
-//this inside global scope
-this.name='lakshmi'
-console.log(`hello ${window.name} inside global scope`)
-//this inside function
-var obj={
-    name:'lakshmi',
-    sayHi: function(){
-        console.log(`hello ${this.name} inside function`)
-    }
-}
-obj.sayHi()
-//this inside innerfunction
-var obj={
-    name:'lakshmi'
-}
-    var sayHi=function(){
-        
-        const sayHello=()=>{
-            console.log(`hello ${this.name} inside innerfunction`)
-        }
-        sayHello.call(this)
-    }
-sayHi()
-
-//this inside method
-var obj={
-    name:'lakshmi',
-    sayHi(){
-        console.log(`hello ${this.name} inside method`)
-    }
-}
-obj.sayHi()
-//this insideconstructor
-let Student=function(name){
-    this.name=name
-}
-Student.prototype.sayHi=function(){
-    console.log(`hello ${this.name} inside constructor`)
-}
-var lakshmi= new Student('lakshmi')
-lakshmi.sayHi()
-
-//this inside class
-class Person{
-    constructor(name){
+class Student{
+    static count=0
+    constructor(name,age,phone,marks){
         this.name=name
+        this.age=age
+        this.phone=phone
+        this.marks=marks
+        Student.count++
     }
-    sayHi(){
-        console.log(`hello ${this.name} inside class`)
+    isEligible(){
+        if(this.marks>40){
+            console.log('eligilble for college')
+        }else{
+            console.log('not eligible for college')
+        }
     }
-
+    static studentsCreated(){
+        console.log(this.count)
+    }
+    printDetails(){
+        console.log(`${this.name}:${this.age}:${this.phone}:${this.marks}`)
+    }
 }
-var lakshmi=new Person('Lakshmi')
-lakshmi.sayHi()
+var student1= new Student('lakshmi',26,123,44)
+student1.printDetails()
+var student2=new Student('mani',31,234,34)
+Student.studentsCreated()
+var student3=new Student('kumar',32,345,50)
+var student4=new Student('bhavani',27,456,72)
+var student5= new Student('venkat',29,567,65)
+student1.isEligible()
+student2.isEligible()
+Student.studentsCreated()
